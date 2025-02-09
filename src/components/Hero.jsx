@@ -33,7 +33,7 @@ const Hero = () => {
               : "opacity-0 -translate-x-40"
           }`}
         >
-          En kort beskrivelse af din side eller projekt
+          Gå på opdagelse i mine kompetancer og projekter!
         </p>
       </div>
     </div>
