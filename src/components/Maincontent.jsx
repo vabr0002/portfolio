@@ -12,7 +12,7 @@ const Maincontent = () => {
         entries.forEach((entry) => {
           setVisibleSections((prev) => ({
             ...prev,
-            [entry.target.dataset.index]: entry.isIntersecting // Fjerner synlighed ved exit
+            [entry.target.dataset.index]: entry.isIntersecting
           }));
         });
       },
@@ -28,49 +28,47 @@ const Maincontent = () => {
 
   const sections = [
     {
-      title: "Prototyping & Brugercentreret Design",
+      title: "Frontend & Webudvikling",
+      image: "/florian-olivo-4hbJ-eymZ1o-unsplash.jpg",
       text: [
-        "Gennem min uddannelse har jeg arbejdet med en række cases, hvor vi har designet og udviklet funktionelle prototyper i Figma.",
-        "Disse prototyper er blevet anvendt til brugertests, hvilket har givet værdifuld indsigt i brugeradfærd og behov.",
-        "Feedback fra testene er systematisk implementeret for at optimere og finjustere løsningerne.",
-        "Den iterative proces har givet mig erfaring med at skabe velgennemtænkte, brugervenlige løsninger, der matcher både forretningsmål og brugerforventninger."
+        "Bygger responsive websites med HTML, CSS og JavaScript.",
+        "Anvender moderne frameworks som React og Next.js.",
+        "Styling og animationer med Tailwind CSS."
       ]
     },
     {
       title: "Designsystemer & UI/UX Konsistens",
+      image: "/zac-wolff-7uSKXpksCKg-unsplash.jpg",
       text: [
-        "Har opnået solid erfaring med at arbejde med designsystemer gennem flere projekter.",
-        "Forstår vigtigheden af systematiske designprincipper for at skabe en ensartet og effektiv brugeroplevelse.",
-        "Designs og komponentbiblioteker struktureres, så de sikrer en konsistent og professionel æstetik på tværs af platforme.",
-        "Effektiv brug af designsystemer har gjort min design- og udviklingsproces mere skalerbar og strømlinet."
+        "Anvender designsystemer for konsistent og effektiv UI/UX.",
+        "Strukturerer komponentbiblioteker til skalerbarhed og professionel æstetik.",
+        "Sikrer ensartet design på tværs af platforme."
       ]
     },
     {
       title: "Informationsarkitektur & Brugeroplevelse",
+      image: "/kelly-sikkema-lFtttcsx5Vk-unsplash.jpg",
       text: [
-        "Erfaring med at optimere informationsarkitektur for bedre navigation og brugervenlighed.",
-        "Har arbejdet med restrukturering af hjemmesider for at gøre dem mere intuitive og letforståelige.",
-        "Har fjernet unødvendige elementer og forbedret informationshierarkiet for en mere strømlinet oplevelse.",
-        "Fokus på simple, brugervenlige designløsninger, der gør det lettere for brugere at finde relevant information."
+        "Optimerer informationsarkitektur for intuitiv navigation.",
+        "Strømliner hierarkier og fjerner overflødige elementer.",
+        "Fokuserer på enkle og brugervenlige designs."
       ]
     },
     {
-      title: "Udviklerkompetencer: Frontend & Webudvikling",
+      title: "Prototyping & Brugercentreret Design",
+      image: "/prototyping.jpg",
       text: [
-        "Solid erfaring med at bygge responsive hjemmesider ved hjælp af HTML, CSS og JavaScript.",
-        "Stærk forståelse for moderne CSS-teknikker, herunder Flexbox, Grid, animationer og pre-processors som SCSS.",
-        "Erfaring med at gøre websites mere dynamiske og interaktive gennem JavaScript (ES6+).",
-        "Grundlæggende forståelse af React og Next.js, herunder komponentbaseret udvikling, state management og routing.",
-        "Har arbejdet med Tailwind CSS for at opbygge skalerbare og vedligeholdelsesvenlige UI-løsninger.",
-        "Forstår vigtigheden af performance-optimering, SEO og accessibility (a11y) i moderne webudvikling."
+        "Designer funktionelle Figma-prototyper til brugertests.",
+        "Optimerer løsninger iterativt baseret på brugerfeedback.",
+        "Skaber brugervenlige designs, der balancerer forretningsmål og brugerbehov."
       ]
     }
   ];
 
   return (
-    <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 mt-20 ">
+    <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 mt-20">
       <div className="mt-10 mb-10 flex justify-center">
-        <h1 className="text-4xl font-bold">Mine Skills</h1>
+        <h1 className="text-4xl font-bold">Kompetancer</h1>
       </div>
 
       {sections.map((section, index) => {
@@ -88,8 +86,8 @@ const Maincontent = () => {
           >
             {/* Billede animation */}
             <img
-              src="/ricardo-gomez-angel-opFPVxMRpP8-unsplash.jpg"
-              alt=""
+              src={section.image}
+              alt={section.title}
               className={`w-[50%] h-auto object-cover rounded-lg transition-all duration-1000 ${
                 isVisible
                   ? "opacity-100 translate-x-0"
