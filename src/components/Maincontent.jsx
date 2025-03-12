@@ -28,47 +28,47 @@ const Maincontent = () => {
 
   const sections = [
     {
-      title: "Frontend & Webudvikling",
+      title: "Frontend & Web Development",
       image: "/florian-olivo-4hbJ-eymZ1o-unsplash.jpg",
       text: [
-        "Bygger responsive websites med HTML, CSS og JavaScript.",
-        "Anvender moderne frameworks som React og Next.js.",
-        "Styling og animationer med Tailwind CSS."
+        "Develop responsive websites using HTML, CSS, and JavaScript.",
+        "Leverage modern frameworks such as React and Next.js.",
+        "Implement styling and animations with Tailwind CSS."
       ]
     },
     {
-      title: "Designsystemer & UI/UX Konsistens",
+      title: "Design Systems & UI/UX Consistency",
       image: "/zac-wolff-7uSKXpksCKg-unsplash.jpg",
       text: [
-        "Anvender designsystemer for konsistent og effektiv UI/UX.",
-        "Strukturerer komponentbiblioteker til skalerbarhed og professionel æstetik.",
-        "Sikrer ensartet design på tværs af platforme."
+        "Utilize design systems to ensure consistent and efficient UI/UX.",
+        "Structure component libraries for scalability and professional aesthetics.",
+        "Maintain uniform design across platforms."
       ]
     },
     {
-      title: "Informationsarkitektur & Brugeroplevelse",
+      title: "Information Architecture & User Experience",
       image: "/kelly-sikkema-lFtttcsx5Vk-unsplash.jpg",
       text: [
-        "Optimerer informationsarkitektur for intuitiv navigation.",
-        "Strømliner hierarkier og fjerner overflødige elementer.",
-        "Fokuserer på enkle og brugervenlige designs."
+        "Optimize information architecture for intuitive navigation.",
+        "Streamline hierarchies and eliminate redundant elements.",
+        "Focus on simple and user-friendly designs."
       ]
     },
     {
-      title: "Prototyping & Brugercentreret Design",
+      title: "Prototyping & User-Centered Design",
       image: "/prototyping.jpg",
       text: [
-        "Designer funktionelle Figma-prototyper til brugertests.",
-        "Optimerer løsninger iterativt baseret på brugerfeedback.",
-        "Skaber brugervenlige designs, der balancerer forretningsmål og brugerbehov."
+        "Design functional Figma prototypes for user testing.",
+        "Iteratively refine solutions based on user feedback.",
+        "Create user-friendly designs that balance business objectives and user needs."
       ]
     }
   ];
 
   return (
-    <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 mt-20">
+    <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 mt-20 bg-cream">
       <div className="mt-10 mb-10 flex justify-center">
-        <h1 className="text-4xl font-bold">Kompetancer</h1>
+        <h1 className="text-6xl font-bold text-dark-gray">Competence</h1>
       </div>
 
       {sections.map((section, index) => {
@@ -88,7 +88,7 @@ const Maincontent = () => {
             <img
               src={section.image}
               alt={section.title}
-              className={`w-[50%] h-auto object-cover rounded-lg transition-all duration-1000 ${
+              className={`w-[50%] h-auto object-cover rounded-lg shadow-lg transition-all duration-1000 ${
                 isVisible
                   ? "opacity-100 translate-x-0"
                   : isEven
@@ -107,10 +107,12 @@ const Maincontent = () => {
                   : "opacity-0 translate-x-20"
               } ${isEven ? "pl-8" : "pr-8"}`}
             >
-              <h2 className="text-2xl font-semibold mb-4">{section.title}</h2>
-              <ul className="list-disc pl-5">
+              <h2 className="text-3xl font-semibold text-red-orange mb-4">
+                {section.title}
+              </h2>
+              <ul className="list-disc pl-5 text-dark-gray">
                 {section.text.map((point, i) => (
-                  <li key={i} className="mb-2">
+                  <li key={i} className="mb-2 ">
                     {point}
                   </li>
                 ))}

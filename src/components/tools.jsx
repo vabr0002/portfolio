@@ -67,74 +67,83 @@ const Tools = () => {
   };
 
   return (
-    <div className="flex items-center justify-center my-16 bg-gray-800">
-      <div className="w-full max-w-[40rem] mx-auto p-6">
+    <div className="flex items-center justify-center bg-dark-gray ">
+      <div className="w-full max-w-[40rem] mx-auto py-12">
         {/* Overskrift */}
-        <h1 className="text-3xl font-bold text-center mb-8 text-white">
+        <h1 className="text-3xl font-bold text-center mb-8 text-cream ">
           Skills & Tools
         </h1>
 
-        {/* Knapper */}
-        <div className="flex justify-center gap-4 mb-8 flex-wrap">
-          <button
-            onClick={() =>
-              setActiveSection(
-                activeSection === "frameworks" ? null : "frameworks"
-              )
-            }
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 border border-gray-300 ${
-              activeSection === "frameworks"
-                ? "bg-white text-black"
-                : "bg-transparent text-white hover:bg-gray-600 hover:text-white"
-            }`}
-          >
-            Frameworks & Languages
-          </button>
-          <button
-            onClick={() =>
-              setActiveSection(activeSection === "software" ? null : "software")
-            }
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 border border-gray-300 ${
-              activeSection === "software"
-                ? "bg-white text-black"
-                : "bg-transparent text-white hover:bg-gray-600 hover:text-white"
-            }`}
-          >
-            Tools
-          </button>
-          <button
-            onClick={() =>
-              setActiveSection(activeSection === "skills" ? null : "skills")
-            }
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 border border-gray-300 ${
-              activeSection === "skills"
-                ? "bg-white text-black"
-                : "bg-transparent text-white hover:bg-gray-600 hover:text-white"
-            }`}
-          >
-            Skills
-          </button>
-        </div>
+        {/* Card-container med navigation og liste */}
+        <div className="bg-cream rounded-lg p-6 ">
+          {/* Navigation */}
+          <div className="flex  h-12 divide-x divide-cream mb-8  ">
+            <button
+              onClick={() =>
+                setActiveSection(
+                  activeSection === "frameworks" ? null : "frameworks"
+                )
+              }
+              className={`flex-1 h-full font-semibold transition-all duration-300 text-center flex items-center justify-center p-6  ${
+                activeSection === "frameworks"
+                  ? "text-red-orange"
+                  : "text-dark-gray hover:text-red-orange"
+              }`}
+            >
+              Frameworks & Languages
+            </button>
+            <button
+              onClick={() =>
+                setActiveSection(
+                  activeSection === "software" ? null : "software"
+                )
+              }
+              className={`flex-1 h-full font-semibold transition-all duration-300 text-center flex items-center justify-center p-6 ${
+                activeSection === "software"
+                  ? "text-red-orange"
+                  : "text-dark-gray hover:text-red-orange"
+              }`}
+            >
+              Tools
+            </button>
+            <button
+              onClick={() =>
+                setActiveSection(activeSection === "skills" ? null : "skills")
+              }
+              className={`flex-1 h-full font-semibold transition-all duration-300 text-center flex items-center justify-center p-6 ${
+                activeSection === "skills"
+                  ? "text-red-orange"
+                  : "text-dark-gray hover:text-red-orange"
+              }`}
+            >
+              Skills
+            </button>
+          </div>
 
-        {/* Container med fast højde og centrering */}
-        <div className="h-[16rem] overflow-hidden flex justify-center">
-          {activeSection && (
-            <div className="max-w-md mx-auto px-4">
-              <div className="grid grid-cols-2 gap-6">
-                {getActiveList().map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 transition-all duration-300 ease-in-out group"
-                  >
-                    <div className="text-3xl text-white group-hover:scale-110  transition-all duration-300">
-                      {item.icon}
+          {/* Container med fast højde og centrering */}
+          <div className="h-[16rem] overflow-hidden flex justify-center items-center">
+            {activeSection ? (
+              <div className="max-w-md mx-auto px-4">
+                <div className="grid grid-cols-2 gap-6">
+                  {getActiveList().map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 transition-all duration-300 ease-in-out group"
+                    >
+                      <div className="text-3xl text-red-orange group-hover:scale-110 transition-all duration-300">
+                        {item.icon}
+                      </div>
+                      <p className="text-lg text-dark-gray">{item.name}</p>
                     </div>
-                    <p className="text-lg text-white">{item.name}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            ) : (
+              <p className="text-xl font-bold text-dark-gray text-center px-4">
+                Click to view my skills and tools
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

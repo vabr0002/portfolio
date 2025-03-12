@@ -10,8 +10,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-gray-800">
-      <div className="absolute inset-0 flex items-center justify-center text-white px-4">
+    <div className="relative w-full h-screen bg-dark-gray">
+      <div className="absolute inset-0 flex items-center justify-center text-cream px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl w-full">
           {/* Tekst */}
           <div
@@ -21,15 +21,14 @@ const Hero = () => {
                 : "opacity-0 -translate-x-80"
             }`}
           >
-            <p className="text-lg md:text-xl text-white">
-              Jeg er en 26-årig multimediedesignerstuderende med fokus på
-              webdesign og brugeroplevelser. Gennem min uddannelse har jeg
-              opnået erfaring med design og udvikling af websites og
-              brugergrænseflader, samt tekniske kompetencer inden for HTML, CSS
-              og JavaScript. Mit mål er at skabe æstetisk tiltalende,
-              brugercentrerede løsninger, der forener design og funktionalitet
-              for en optimal brugeroplevelse.
-            </p>
+            <div>
+              <h1 className="text-2xl md:text-4xl font-bold text-cream mb-2">
+                Valdemar Bang Bredvig
+              </h1>
+              <h2 className="text-4xl md:text-6xl font-bold text-red-orange">
+                MULTIMEDIA DESIGNER & FRONTEND DEVELOPER
+              </h2>
+            </div>
           </div>
 
           {/* Billed-stack */}
@@ -37,7 +36,7 @@ const Hero = () => {
             <Image
               src="/404017517_368455572436400_734122118462416329_n (1).jpg"
               alt="Top Image"
-              width={250}
+              width={280}
               height={266}
               className={`rounded-lg shadow-lg transition-all duration-1000 delay-200 ${
                 isVisible
@@ -48,7 +47,7 @@ const Hero = () => {
             <Image
               src="/2.img.jpg"
               alt="Bottom Image"
-              width={250}
+              width={280}
               height={266}
               className={`rounded-lg shadow-lg transition-all duration-1000 delay-300 md:-translate-y-10 ${
                 isVisible

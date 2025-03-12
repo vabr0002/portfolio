@@ -2,28 +2,31 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="w-full  text-white py-8 bg-gray-800 px-32 py-20">
+    <footer className="w-full  text-cream  bg-dark-gray px-32 py-24">
       <div className="max-w-7xl mx-96 px-6 text-center">
-        {/* Logo */}
+        <h1 className="text-4xl font-bold mb-6 text-red-orange">
+          Get in touch
+        </h1>
 
         {/* Professional Text */}
-        <p className="text-lg mb-6">
-          Er du interesseret i et samarbejde eller har du spørgsmål? Tøv ikke
-          med at kontakte mig. Jeg ser frem til at høre fra dig og hjælpe med
-          dine behov.
+        <p className="text-lg font-semibold mb-6">
+          {" "}
+          Interested in a collaboration or have any questions? Feel free to
+          reach out. I look forward to hearing from you and assisting with your
+          needs.{" "}
         </p>
 
         {/* Call to Action Buttons */}
         <div className="flex justify-center gap-8">
           <a
             href="mailto:dinemail@mail.com"
-            className="bg-slate-300 text-black rounded-full px-6 py-4 hover:bg-transparent hover:text-white transition-all duration-500"
+            className="bg-red-orange text-cream rounded-full px-4 py-4 border-2 border-red-orange hover:bg-transparent hover:text-red-orange transition-all duration-500"
           >
             Valdemarabb@gmail.com
           </a>
           <a
             href="tel:+4512345678"
-            className="bg-slate-300 text-black rounded-full px-6 py-4 hover:bg-transparent hover:text-white transition-all duration-500"
+            className="bg-red-orange text-cream rounded-full px-4 py-4 border-2 border-red-orange hover:bg-transparent hover:text-red-orange transition-all duration-500"
           >
             +45 27 60 68 03
           </a>

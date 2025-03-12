@@ -10,16 +10,16 @@ import Tools from "@/components/tools";
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-full bg-cream m-0 p-0">
       <Navigation />
       <Hero />
-      <div id="maincontent">
+      <div id="maincontent" className="w-full">
         <Maincontent />
       </div>
-      <div id="tools">
+      <div id="tools" className="w-full">
         <Tools />
       </div>
-      <div id="ommig">
+      <div id="ommig" className="w-full">
         <Ommig />
       </div>
       <Footer />

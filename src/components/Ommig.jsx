@@ -11,9 +11,9 @@ const Ommig = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        setIsVisible(entry.isIntersecting); // Opdaterer isVisible baseret på synlighed
+        setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.3 } // Udløser når 30% af sektionen er synlig eller forsvinder
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -26,32 +26,32 @@ const Ommig = () => {
   const images = [
     {
       src: "/IMG_2863.jpeg",
-      text: "Jeg er en stolt far til en dejlig datter"
+      text: "I am a proud father to a wonderful daughter."
     },
     {
       src: "/IMG_3841.jpeg",
-      text: "Jeg er meget aktiv og nyder at udfordre mig selv i naturen og i fitnesscenteret."
+      text: "I am highly active and love challenging myself in nature and the gym."
     },
     {
       src: "/IMG_1441.JPG",
-      text: "Jeg holder meget af at lave mad og udforske kulturer fra hele verden"
+      text: "I have a passion for cooking and exploring cultures from around the world."
     }
   ];
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center px-6 bg-black/50 mb-32">
+    <div className="h-screen flex flex-col justify-center items-center px-6 bg-cream mb-32">
       <section
         ref={sectionRef}
-        className="max-w-7xl w-full text-center text-white"
+        className="max-w-7xl w-full text-center text-dark-gray"
       >
         <h1
-          className={`text-4xl font-bold mb-4 transition-all duration-1000 ${
+          className={`text-4xl text-red-orange font-bold mb-4 transition-all duration-1000 ${
             isVisible
               ? "opacity-100 translate-x-0"
               : "opacity-0 -translate-x-80"
           }`}
         >
-          Om mig
+          About Me
         </h1>
         <div className="mb-12 max-w-2xl mx-auto">
           <p
@@ -61,12 +61,9 @@ const Ommig = () => {
                 : "opacity-0 -translate-x-40"
             }`}
           >
-            <span className="font-semibold">
-              Mit navn er Valdemar Bang Bredvig
-            </span>
-            , jeg er en 26-årig passioneret{" "}
-            <span className="italic">webudvikler og UX/UI-designer</span>. Jeg
-            kommer oprindeligt fra Odense og er nu bosat i København.
+            <strong>Valdemar Bang Bredvig</strong>, a 26-year-old passionate
+            <strong> Web Developer</strong> and <strong>UX/UI-Designer</strong>.
+            Originally from Odense, I now live in Copenhagen.
           </p>
           <p
             className={`text-lg leading-relaxed mt-4 transition-all duration-1000 delay-300 ${
@@ -75,10 +72,11 @@ const Ommig = () => {
                 : "opacity-0 -translate-x-40"
             }`}
           >
-            Jeg afslutter min multimediedesigner-uddannelse på KEA til sommer
-            2025 og fortsætter derefter på professionsbacheloren i webudvikling
-            fra august. Med en glad og imødekommende tilgang kombinerer jeg
-            kreativitet og teknisk kunnen for at skabe brugervenlige løsninger.
+            I will complete my Multimedia Design degree at KEA in the summer of
+            2025, after which I will continue with a Bachelor's in Web
+            Development starting in August. With a positive and welcoming
+            approach, I combine creativity and technical skills to craft
+            user-friendly solutions.
           </p>
           <p
             className={`text-lg leading-relaxed mt-4 transition-all duration-1000 delay-400 ${
@@ -87,8 +85,8 @@ const Ommig = () => {
                 : "opacity-0 -translate-x-40"
             }`}
           >
-            Jeg er ansvarsbevidst, lærenem og altid klar til at tage nye
-            udfordringer op.
+            I am responsible, eager to learn, and always ready to take on new
+            challenges.
           </p>
         </div>
         <div className="flex flex-row gap-4 h-[50vh] mx-4">
@@ -109,16 +107,16 @@ const Ommig = () => {
                 }`}
               />
               <p
-                className={`absolute text-white text-lg font-semibold px-6 text-center transition-all duration-700 ease-in-out ${
+                className={`absolute text-lg font-semibold px-6 text-center transition-all duration-700 ease-in-out ${
                   hoveredIndex === index
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
+                    ? "opacity-100 translate-y-0 text-red-orange"
+                    : "opacity-0 translate-y-4 text-cream"
                 }`}
               >
                 {image.text}
               </p>
               {hoveredIndex !== null && hoveredIndex !== index && (
-                <div className="absolute w-full h-full bg-black/40 rounded-lg transition-all duration-700"></div>
+                <div className="absolute w-full h-full bg-dark-gray/50 rounded-lg transition-all duration-700"></div>
               )}
             </div>
           ))}
