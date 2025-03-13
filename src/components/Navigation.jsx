@@ -13,7 +13,9 @@ const Navigation = () => {
   return (
     <div className="w-full bg-cream flex items-center justify-between py-4 px-6 mx-auto text-red-orange z-10">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold text-gray-800 tracking-wide">VA</h1>
+        <h1 className="text-6xl font-bold  tracking-wide text-red-orange">
+          VA
+        </h1>
         <h3 className="text-xl text-gray-500 mt-[-8px] translate-x-2">
           WEB DEVELOPMENT
         </h3>
