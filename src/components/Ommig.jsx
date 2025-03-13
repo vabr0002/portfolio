@@ -62,8 +62,9 @@ const Ommig = () => {
             }`}
           >
             <strong>Valdemar Bang Bredvig</strong>, a 26-year-old passionate
-            <strong> Web Developer</strong> and <strong>UX/UI-Designer</strong>.
-            Originally from Odense, I now live in Copenhagen.
+            <strong> Frontend Developer</strong> and{" "}
+            <strong>UX/UI-Designer</strong>. Originally from Odense, I now live
+            in Copenhagen.
           </p>
           <p
             className={`text-lg leading-relaxed mt-4 transition-all duration-1000 delay-300 ${

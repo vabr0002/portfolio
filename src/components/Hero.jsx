@@ -1,6 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +31,26 @@ const Hero = () => {
               <h2 className="text-4xl md:text-6xl font-bold text-red-orange">
                 MULTIMEDIA DESIGNER & FRONTEND DEVELOPER
               </h2>
+              <div className="flex gap-6 mt-4 justify-start">
+                <a
+                  href="https://github.com/vabr0002"
+                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
+                >
+                  <FaGithub className="text-3xl md:text-4xl" />
+                </a>
+                <a
+                  href="https://www.instagram.com/valdemarbredvig/"
+                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
+                >
+                  <FaInstagram className="text-3xl md:text-4xl" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/valdemar-bang-bredvig-0930ab32b/"
+                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
+                >
+                  <FaLinkedin className="text-3xl md:text-4xl" />
+                </a>
+              </div>
             </div>
           </div>
 
