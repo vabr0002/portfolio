@@ -119,42 +119,42 @@ const Tools = () => {
     frameworks: {
       title: "Frameworks & Languages",
       items: [
-        { icon: <RiNextjsFill />, name: "Next.js", level: 90 },
-        { icon: <FaReact />, name: "React", level: 85 },
-        { icon: <TiHtml5 />, name: "HTML", level: 95 },
+        { icon: <RiNextjsFill />, name: "Next.js", level: 65 },
+        { icon: <FaReact />, name: "React", level: 65 },
+        { icon: <TiHtml5 />, name: "HTML", level: 90 },
         { icon: <IoLogoCss3 />, name: "CSS", level: 90 },
-        { icon: <IoLogoJavascript />, name: "JavaScript", level: 80 },
+        { icon: <IoLogoJavascript />, name: "JavaScript", level: 70 },
         { icon: <RiTailwindCssFill />, name: "Tailwind CSS", level: 85 },
-        { icon: <FaDatabase />, name: "Rest API", level: 75 },
-        { icon: <RiSupabaseFill />, name: "Supabase", level: 70 }
+        { icon: <FaDatabase />, name: "Rest API", level: 60 },
+        { icon: <RiSupabaseFill />, name: "Supabase", level: 65 }
       ]
     },
     software: {
       title: "Tools",
       items: [
-        { icon: <FaFigma />, name: "Figma", level: 90 },
+        { icon: <FaFigma />, name: "Figma", level: 80 },
         { icon: <VscVscode />, name: "VS Code", level: 95 },
-        { icon: <SiAdobelightroom />, name: "Adobe Lightroom", level: 80 },
-        { icon: <SiAdobeindesign />, name: "Adobe InDesign", level: 75 },
-        { icon: <SiAdobeillustrator />, name: "Adobe Illustrator", level: 85 },
-        { icon: <SiAdobepremierepro />, name: "Adobe Premiere", level: 70 }
+        { icon: <SiAdobelightroom />, name: "Adobe Lightroom", level: 65 },
+        { icon: <SiAdobeindesign />, name: "Adobe InDesign", level: 60 },
+        { icon: <SiAdobeillustrator />, name: "Adobe Illustrator", level: 55 },
+        { icon: <SiAdobepremierepro />, name: "Adobe Premiere", level: 50 }
       ]
     },
     skills: {
       title: "Skills",
       items: [
-        { icon: <MdOutlineWeb />, name: "Web development", level: 90 },
-        { icon: <FaPalette />, name: "UI design", level: 85 },
-        { icon: <FaUsers />, name: "User experience", level: 80 },
+        { icon: <MdOutlineWeb />, name: "Web development", level: 80 },
+        { icon: <FaPalette />, name: "UI design", level: 75 },
+        { icon: <FaUsers />, name: "User experience", level: 75 },
         {
           icon: <MdArchitecture />,
           name: "Information architecture",
-          level: 75
+          level: 65
         },
-        { icon: <MdBrandingWatermark />, name: "Branding", level: 70 },
-        { icon: <FaCameraRetro />, name: "Photography", level: 85 },
-        { icon: <TbPhotoEdit />, name: "Photo editing", level: 80 },
-        { icon: <FaInstagram />, name: "Social media", level: 75 }
+        { icon: <MdBrandingWatermark />, name: "Branding", level: 60 },
+        { icon: <FaCameraRetro />, name: "Photography", level: 50 },
+        { icon: <TbPhotoEdit />, name: "Photo editing", level: 55 },
+        { icon: <FaInstagram />, name: "Social media", level: 45 }
       ]
     }
   };
