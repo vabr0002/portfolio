@@ -36,18 +36,51 @@ const Tools = () => {
   const [isChanging, setIsChanging] = useState(false);
   const [pillStyle, setPillStyle] = useState({});
   const tabsRef = useRef({});
+  const tabContainerRef = useRef(null);
 
   // Opdater pill position når activeSection ændres
   useEffect(() => {
-    if (tabsRef.current[activeSection]) {
+    if (tabsRef.current[activeSection] && tabContainerRef.current) {
       const activeTab = tabsRef.current[activeSection];
+      const container = tabContainerRef.current;
+      const containerLeft = container.getBoundingClientRect().left;
+      const tabLeft = activeTab.getBoundingClientRect().left;
+
+      // Beregn position relativt til container
+      const relativeLeft = tabLeft - containerLeft;
+
       setPillStyle({
         width: `${activeTab.offsetWidth}px`,
         height: `${activeTab.offsetHeight}px`,
-        transform: `translateX(${activeTab.offsetLeft}px)`,
+        left: `${relativeLeft}px`,
         transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
       });
     }
+  }, [activeSection]);
+
+  // Lyt efter window resize for at opdatere pill position
+  useEffect(() => {
+    const handleResize = () => {
+      if (tabsRef.current[activeSection] && tabContainerRef.current) {
+        const activeTab = tabsRef.current[activeSection];
+        const container = tabContainerRef.current;
+        const containerLeft = container.getBoundingClientRect().left;
+        const tabLeft = activeTab.getBoundingClientRect().left;
+
+        // Beregn position relativt til container
+        const relativeLeft = tabLeft - containerLeft;
+
+        setPillStyle({
+          width: `${activeTab.offsetWidth}px`,
+          height: `${activeTab.offsetHeight}px`,
+          left: `${relativeLeft}px`,
+          transition: "none" // Undgå animation ved resize
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [activeSection]);
 
   const handleSectionChange = (section) => {
@@ -65,11 +98,18 @@ const Tools = () => {
       tabsRef.current[key] = el;
 
       // Initier pill position når første tab bliver registreret
-      if (key === activeSection) {
+      if (key === activeSection && tabContainerRef.current) {
+        const container = tabContainerRef.current;
+        const containerLeft = container.getBoundingClientRect().left;
+        const tabLeft = el.getBoundingClientRect().left;
+
+        // Beregn position relativt til container
+        const relativeLeft = tabLeft - containerLeft;
+
         setPillStyle({
           width: `${el.offsetWidth}px`,
           height: `${el.offsetHeight}px`,
-          transform: `translateX(${el.offsetLeft}px)`
+          left: `${relativeLeft}px`
         });
       }
     }
@@ -79,14 +119,14 @@ const Tools = () => {
     frameworks: {
       title: "Frameworks & Languages",
       items: [
-        { icon: <RiNextjsFill />, name: "Next.js", level: 70 },
-        { icon: <FaReact />, name: "React", level: 65 },
-        { icon: <TiHtml5 />, name: "HTML", level: 90 },
+        { icon: <RiNextjsFill />, name: "Next.js", level: 90 },
+        { icon: <FaReact />, name: "React", level: 85 },
+        { icon: <TiHtml5 />, name: "HTML", level: 95 },
         { icon: <IoLogoCss3 />, name: "CSS", level: 90 },
-        { icon: <IoLogoJavascript />, name: "JavaScript", level: 70 },
+        { icon: <IoLogoJavascript />, name: "JavaScript", level: 80 },
         { icon: <RiTailwindCssFill />, name: "Tailwind CSS", level: 85 },
-        { icon: <FaDatabase />, name: "Rest API", level: 50 },
-        { icon: <RiSupabaseFill />, name: "Supabase", level: 60 }
+        { icon: <FaDatabase />, name: "Rest API", level: 75 },
+        { icon: <RiSupabaseFill />, name: "Supabase", level: 70 }
       ]
     },
     software: {
@@ -94,10 +134,10 @@ const Tools = () => {
       items: [
         { icon: <FaFigma />, name: "Figma", level: 90 },
         { icon: <VscVscode />, name: "VS Code", level: 95 },
-        { icon: <SiAdobelightroom />, name: "Adobe Lightroom", level: 65 },
-        { icon: <SiAdobeindesign />, name: "Adobe InDesign", level: 60 },
-        { icon: <SiAdobeillustrator />, name: "Adobe Illustrator", level: 55 },
-        { icon: <SiAdobepremierepro />, name: "Adobe Premiere", level: 50 }
+        { icon: <SiAdobelightroom />, name: "Adobe Lightroom", level: 80 },
+        { icon: <SiAdobeindesign />, name: "Adobe InDesign", level: 75 },
+        { icon: <SiAdobeillustrator />, name: "Adobe Illustrator", level: 85 },
+        { icon: <SiAdobepremierepro />, name: "Adobe Premiere", level: 70 }
       ]
     },
     skills: {
@@ -111,10 +151,10 @@ const Tools = () => {
           name: "Information architecture",
           level: 75
         },
-        { icon: <MdBrandingWatermark />, name: "Branding", level: 60 },
-        { icon: <FaCameraRetro />, name: "Photography", level: 65 },
-        { icon: <TbPhotoEdit />, name: "Photo editing", level: 60 },
-        { icon: <FaInstagram />, name: "Social media", level: 50 }
+        { icon: <MdBrandingWatermark />, name: "Branding", level: 70 },
+        { icon: <FaCameraRetro />, name: "Photography", level: 85 },
+        { icon: <TbPhotoEdit />, name: "Photo editing", level: 80 },
+        { icon: <FaInstagram />, name: "Social media", level: 75 }
       ]
     }
   };
@@ -123,15 +163,20 @@ const Tools = () => {
     <div className="bg-dark-gray py-16">
       <div className="max-w-6xl mx-auto px-4">
         <h1 className="text-5xl font-bold text-center mb-12 text-white">
-          <span className="bg-clip-text text-red-orange">Skills & Tools</span>
+          <span className="bg-clip-text text-red-orange">
+            Skills & Expertise
+          </span>
         </h1>
 
         {/* Navigation Tabs med glidende pill animation */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-cream p-1 rounded-full relative">
-            {/* Moving pill background */}
+          <div
+            ref={tabContainerRef}
+            className="inline-flex bg-cream p-1 rounded-full relative"
+          >
+            {/* Moving pill background - ændret fra transform:translateX til absolute positioning med left */}
             <div
-              className="absolute bg-red-orange rounded-full z-0 shadow-lg"
+              className="absolute top-1 bg-red-orange rounded-full z-0 shadow-lg"
               style={pillStyle}
             />
 
