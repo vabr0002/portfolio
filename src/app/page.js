@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import Ommig from "@/components/Ommig";
 import Maincontent from "@/components/Maincontent";
 import Footer from "@/components/footer";
-import ProgressLine from "@/components/ProgressLine";
+
 import Tools from "@/components/tools";
 
 export default function Home() {

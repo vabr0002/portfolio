@@ -68,7 +68,7 @@ const Maincontent = () => {
   return (
     <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 mt-20 bg-cream">
       <div className="mt-10 mb-10 flex justify-center">
-        <h1 className="text-6xl font-bold text-dark-gray">Competence</h1>
+        <h1 className="text-6xl font-bold text-red-orange">Competence</h1>
       </div>
 
       {sections.map((section, index) => {

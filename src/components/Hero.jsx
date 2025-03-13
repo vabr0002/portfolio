@@ -25,8 +25,8 @@ const Hero = () => {
             }`}
           >
             <div>
-              <h1 className="text-2xl md:text-4xl font-bold text-cream mb-2">
-                Valdemar Bang Bredvig
+              <h1 className="text-2xl md:text-3xl font-bold text-cream mb-2">
+                VALDEMAR BANG BREDVIG
               </h1>
               <h2 className="text-4xl md:text-6xl font-bold text-red-orange">
                 MULTIMEDIA DESIGNER & FRONTEND DEVELOPER
@@ -45,7 +45,7 @@ const Hero = () => {
                   <FaInstagram className="text-3xl md:text-4xl" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/valdemar-bang-bredvig-0930ab32b/"
+                  href=""
                   className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
                 >
                   <FaLinkedin className="text-3xl md:text-4xl" />
