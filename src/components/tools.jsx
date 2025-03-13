@@ -123,9 +123,7 @@ const Tools = () => {
     <div className="bg-dark-gray py-16">
       <div className="max-w-6xl mx-auto px-4">
         <h1 className="text-5xl font-bold text-center mb-12 text-white">
-          <span className="bg-clip-text text-red-orange">
-            Skills & Expertise
-          </span>
+          <span className="bg-clip-text text-red-orange">Skills & Tools</span>
         </h1>
 
         {/* Navigation Tabs med glidende pill animation */}
