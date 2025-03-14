@@ -33,6 +33,7 @@ import { FaInstagram } from "react-icons/fa6";
 
 const Tools = () => {
   const [activeSection, setActiveSection] = useState("frameworks");
+  const [prevSection, setPrevSection] = useState(null);
   const [isChanging, setIsChanging] = useState(false);
   const [pillStyle, setPillStyle] = useState({});
   const tabsRef = useRef({});
@@ -85,6 +86,7 @@ const Tools = () => {
 
   const handleSectionChange = (section) => {
     if (section !== activeSection) {
+      setPrevSection(activeSection); // Gem den tidligere sektion
       setActiveSection(section);
       setIsChanging(true);
       setTimeout(() => {
@@ -112,6 +114,28 @@ const Tools = () => {
           left: `${relativeLeft}px`
         });
       }
+    }
+  };
+
+  // Bestem animations-retning baseret på aktiv sektion
+  const getAnimationDirection = () => {
+    switch (activeSection) {
+      case "frameworks":
+        return isChanging
+          ? "opacity-0 transform -translate-x-8" // Kommer ind fra venstre
+          : "opacity-100 transform translate-x-0";
+      case "software":
+        return isChanging
+          ? "opacity-0 transform translate-y-8" // Kommer ind fra bunden
+          : "opacity-100 transform translate-y-0";
+      case "skills":
+        return isChanging
+          ? "opacity-0 transform translate-x-8" // Kommer ind fra højre
+          : "opacity-100 transform translate-x-0";
+      default:
+        return isChanging
+          ? "opacity-0 transform translate-y-4"
+          : "opacity-100 transform translate-y-0";
     }
   };
 
@@ -200,17 +224,13 @@ const Tools = () => {
         {/* Content Area */}
         <div className="min-h-[28rem] relative">
           <div
-            className={`transition-all duration-300 ${
-              isChanging
-                ? "opacity-0 transform translate-y-4"
-                : "opacity-100 transform translate-y-0"
-            }`}
+            className={`transition-all duration-600 ${getAnimationDirection()}`}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {categories[activeSection].items.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-cream rounded-xl overflow-hidden shadow-lg group hover:shadow-red-orange/20 transition-all duration-300 transform hover:-translate-y-1"
+                  className="bg-cream rounded-xl overflow-hidden shadow-lg group hover:shadow-red-orange/20 transition-all duration-600 transform hover:-translate-y-1"
                 >
                   <div className="p-6 flex flex-col items-center">
                     <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-all duration-300">

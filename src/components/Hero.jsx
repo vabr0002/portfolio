@@ -1,88 +1,298 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { FaGithub } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
 
-const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false);
+import React, { useState, useRef, useEffect } from "react";
+import {
+  RiNextjsFill,
+  RiTailwindCssFill,
+  RiSupabaseFill
+} from "react-icons/ri";
+import {
+  FaReact,
+  FaDatabase,
+  FaFigma,
+  FaUsers,
+  FaPalette,
+  FaCameraRetro
+} from "react-icons/fa";
+import { TiHtml5 } from "react-icons/ti";
+import { IoLogoCss3, IoLogoJavascript } from "react-icons/io5";
+import { VscVscode } from "react-icons/vsc";
+import {
+  SiAdobelightroom,
+  SiAdobeindesign,
+  SiAdobeillustrator,
+  SiAdobepremierepro
+} from "react-icons/si";
+import {
+  MdOutlineWeb,
+  MdBrandingWatermark,
+  MdArchitecture
+} from "react-icons/md";
+import { TbPhotoEdit } from "react-icons/tb";
+import { FaInstagram } from "react-icons/fa6";
 
+const Tools = () => {
+  const [activeSection, setActiveSection] = useState("frameworks");
+  const [isFading, setIsFading] = useState(false); // Ny state til fade
+  const [pillStyle, setPillStyle] = useState({});
+  const tabsRef = useRef({});
+  const tabContainerRef = useRef(null);
+
+  // Initial fade-in ved mount
   useEffect(() => {
-    setTimeout(() => setIsVisible(true), 100);
+    setIsFading(true); // Start med fade-in
   }, []);
 
-  return (
-    <div className="relative w-full h-screen bg-dark-gray">
-      <div className="absolute inset-0 flex items-center justify-center text-cream px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl w-full">
-          {/* Tekst */}
-          <div
-            className={`flex items-center justify-center transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-80"
-            }`}
-          >
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-cream mb-2">
-                VALDEMAR BANG BREDVIG
-              </h1>
-              <h2 className="text-4xl md:text-6xl font-bold text-red-orange">
-                MULTIMEDIA DESIGNER & FRONTEND DEVELOPER
-              </h2>
-              <div className="flex gap-6 mt-4 justify-start">
-                <a
-                  href="https://github.com/vabr0002"
-                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
-                >
-                  <FaGithub className="text-3xl md:text-4xl" />
-                </a>
-                <a
-                  href="https://www.instagram.com/valdemarbredvig/"
-                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
-                >
-                  <FaInstagram className="text-3xl md:text-4xl" />
-                </a>
-                <a
-                  href=""
-                  className="text-cream hover:text-red-orange transform hover:scale-105 transition-all duration-200"
-                >
-                  <FaLinkedin className="text-3xl md:text-4xl" />
-                </a>
-              </div>
-            </div>
-          </div>
+  // Opdater pill position
+  useEffect(() => {
+    if (tabsRef.current[activeSection] && tabContainerRef.current) {
+      const activeTab = tabsRef.current[activeSection];
+      const container = tabContainerRef.current;
+      const containerLeft = container.getBoundingClientRect().left;
+      const tabLeft = activeTab.getBoundingClientRect().left;
+      const relativeLeft = tabLeft - containerLeft;
 
-          {/* Billed-stack */}
-          <div className="relative flex flex-col items-center justify-center space-y-4 md:space-y-0 md:flex-row md:space-x-4">
-            <Image
-              src="/404017517_368455572436400_734122118462416329_n (1).jpg"
-              alt="Top Image"
-              width={280}
-              height={266}
-              className={`rounded-lg shadow-lg transition-all duration-1000 delay-200 ${
-                isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 translate-x-40"
-              }`}
+      setPillStyle({
+        width: `${activeTab.offsetWidth}px`,
+        height: `${activeTab.offsetHeight}px`,
+        left: `${relativeLeft}px`,
+        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
+      });
+    }
+  }, [activeSection]);
+
+  // Håndter resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (tabsRef.current[activeSection] && tabContainerRef.current) {
+        const activeTab = tabsRef.current[activeSection];
+        const container = tabContainerRef.current;
+        const containerLeft = container.getBoundingClientRect().left;
+        const tabLeft = activeTab.getBoundingClientRect().left;
+        const relativeLeft = tabLeft - containerLeft;
+
+        setPillStyle({
+          width: `${activeTab.offsetWidth}px`,
+          height: `${activeTab.offsetHeight}px`,
+          left: `${relativeLeft}px`,
+          transition: "none"
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeSection]);
+
+  const handleSectionChange = (section) => {
+    if (section !== activeSection) {
+      setIsFading(false); // Start fade-out
+      setTimeout(() => {
+        setActiveSection(section);
+        setIsFading(true); // Start fade-in efter skift
+      }, 500); // Vent til fade-out er færdig
+    }
+  };
+
+  const registerTabRef = (el, key) => {
+    if (el && !tabsRef.current[key]) {
+      tabsRef.current[key] = el;
+      if (key === activeSection && tabContainerRef.current) {
+        const container = tabContainerRef.current;
+        const containerLeft = container.getBoundingClientRect().left;
+        const tabLeft = el.getBoundingClientRect().left;
+        const relativeLeft = tabLeft - containerLeft;
+
+        setPillStyle({
+          width: `${el.offsetWidth}px`,
+          height: `${el.offsetHeight}px`,
+          left: `${relativeLeft}px`
+        });
+      }
+    }
+  };
+
+  const categories = {
+    frameworks: {
+      title: "Frameworks & Languages",
+      items: [
+        { icon: <RiNextjsFill />, name: "Next.js", level: 65 },
+        { icon: <FaReact />, name: "React", level: 65 },
+        { icon: <TiHtml5 />, name: "HTML", level: 90 },
+        { icon: <IoLogoCss3 />, name: "CSS", level: 90 },
+        { icon: <IoLogoJavascript />, name: "JavaScript", level: 70 },
+        { icon: <RiTailwindCssFill />, name: "Tailwind CSS", level: 85 },
+        { icon: <FaDatabase />, name: "Rest API", level: 60 },
+        { icon: <RiSupabaseFill />, name: "Supabase", level: 65 }
+      ]
+    },
+    software: {
+      title: "Tools",
+      items: [
+        { icon: <FaFigma />, name: "Figma", level: 80 },
+        { icon: <VscVscode />, name: "VS Code", level: 95 },
+        { icon: <SiAdobelightroom />, name: "Adobe Lightroom", level: 65 },
+        { icon: <SiAdobeindesign />, name: "Adobe InDesign", level: 60 },
+        { icon: <SiAdobeillustrator />, name: "Adobe Illustrator", level: 55 },
+        { icon: <SiAdobepremierepro />, name: "Adobe Premiere", level: 50 }
+      ]
+    },
+    skills: {
+      title: "Skills",
+      items: [
+        { icon: <MdOutlineWeb />, name: "Web development", level: 80 },
+        { icon: <FaPalette />, name: "UI design", level: 75 },
+        { icon: <FaUsers />, name: "User experience", level: 75 },
+        {
+          icon: <MdArchitecture />,
+          name: "Information architecture",
+          level: 65
+        },
+        { icon: <MdBrandingWatermark />, name: "Branding", level: 60 },
+        { icon: <FaCameraRetro />, name: "Photography", level: 50 },
+        { icon: <TbPhotoEdit />, name: "Photo editing", level: 55 },
+        { icon: <FaInstagram />, name: "Social media", level: 45 }
+      ]
+    }
+  };
+
+  return (
+    <div className="bg-dark-gray py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        <h1 className="text-5xl font-bold text-center mb-12 text-white">
+          <span className="bg-clip-text text-red-orange">
+            Skills & Expertise
+          </span>
+        </h1>
+
+        {/* Navigation Tabs */}
+        <div className="flex justify-center mb-12">
+          <div
+            ref={tabContainerRef}
+            className="inline-flex bg-cream p-1 rounded-full relative"
+          >
+            <div
+              className="absolute top-1 bg-red-orange rounded-full z-0 shadow-lg"
+              style={pillStyle}
             />
-            <Image
-              src="/2.img.jpg"
-              alt="Bottom Image"
-              width={280}
-              height={266}
-              className={`rounded-lg shadow-lg transition-all duration-1000 delay-300 md:-translate-y-10 ${
-                isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 translate-x-40"
-              }`}
-            />
+            {Object.keys(categories).map((key) => (
+              <button
+                key={key}
+                ref={(el) => registerTabRef(el, key)}
+                onClick={() => handleSectionChange(key)}
+                className={`px-6 py-2 rounded-full font-medium z-10 relative transition-colors duration-300 ${
+                  activeSection === key
+                    ? "text-white"
+                    : "text-dark-gray hover:text-red-orange"
+                }`}
+              >
+                {categories[key].title}
+              </button>
+            ))}
           </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="min-h-[28rem] relative">
+          {activeSection === "frameworks" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.frameworks.items.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
+                >
+                  <div className="p-6 flex flex-col items-center">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
+                        style={{ width: `${item.level}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between w-full mt-1">
+                      <span className="text-xs text-gray-400">Beginner</span>
+                      <span className="text-xs text-red-300">Expert</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeSection === "software" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.software.items.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
+                >
+                  <div className="p-6 flex flex-col items-center">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
+                        style={{ width: `${item.level}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between w-full mt-1">
+                      <span className="text-xs text-gray-400">Beginner</span>
+                      <span className="text-xs text-red-300">Expert</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeSection === "skills" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.skills.items.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
+                >
+                  <div className="p-6 flex flex-col items-center">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
+                        style={{ width: `${item.level}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between w-full mt-1">
+                      <span className="text-xs text-gray-400">Beginner</span>
+                      <span className="text-xs text-red-300">Expert</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Hero;
+export default Tools;
