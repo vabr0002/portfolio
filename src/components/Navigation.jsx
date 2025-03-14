@@ -11,7 +11,7 @@ const Navigation = () => {
   };
 
   return (
-    <div className="w-full bg-cream flex items-center justify-between py-4 px-6 mx-auto text-red-orange z-10">
+    <div className="w-full bg-cream flex items-center justify-between  px-6 mx-auto text-red-orange z-10">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-6xl font-bold  tracking-wide text-red-orange">
           VA

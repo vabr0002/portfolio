@@ -33,21 +33,23 @@ import { FaInstagram } from "react-icons/fa6";
 
 const Tools = () => {
   const [activeSection, setActiveSection] = useState("frameworks");
-  const [prevSection, setPrevSection] = useState(null);
-  const [isChanging, setIsChanging] = useState(false);
+  const [isFading, setIsFading] = useState(false); // Ny state til fade
   const [pillStyle, setPillStyle] = useState({});
   const tabsRef = useRef({});
   const tabContainerRef = useRef(null);
 
-  // Opdater pill position når activeSection ændres
+  // Initial fade-in ved mount
+  useEffect(() => {
+    setIsFading(true); // Start med fade-in
+  }, []);
+
+  // Opdater pill position
   useEffect(() => {
     if (tabsRef.current[activeSection] && tabContainerRef.current) {
       const activeTab = tabsRef.current[activeSection];
       const container = tabContainerRef.current;
       const containerLeft = container.getBoundingClientRect().left;
       const tabLeft = activeTab.getBoundingClientRect().left;
-
-      // Beregn position relativt til container
       const relativeLeft = tabLeft - containerLeft;
 
       setPillStyle({
@@ -59,7 +61,7 @@ const Tools = () => {
     }
   }, [activeSection]);
 
-  // Lyt efter window resize for at opdatere pill position
+  // Håndter resize
   useEffect(() => {
     const handleResize = () => {
       if (tabsRef.current[activeSection] && tabContainerRef.current) {
@@ -67,15 +69,13 @@ const Tools = () => {
         const container = tabContainerRef.current;
         const containerLeft = container.getBoundingClientRect().left;
         const tabLeft = activeTab.getBoundingClientRect().left;
-
-        // Beregn position relativt til container
         const relativeLeft = tabLeft - containerLeft;
 
         setPillStyle({
           width: `${activeTab.offsetWidth}px`,
           height: `${activeTab.offsetHeight}px`,
           left: `${relativeLeft}px`,
-          transition: "none" // Undgå animation ved resize
+          transition: "none"
         });
       }
     };
@@ -86,26 +86,21 @@ const Tools = () => {
 
   const handleSectionChange = (section) => {
     if (section !== activeSection) {
-      setPrevSection(activeSection); // Gem den tidligere sektion
-      setActiveSection(section);
-      setIsChanging(true);
+      setIsFading(false); // Start fade-out
       setTimeout(() => {
-        setIsChanging(false);
-      }, 300);
+        setActiveSection(section);
+        setIsFading(true); // Start fade-in efter skift
+      }, 500); // Vent til fade-out er færdig
     }
   };
 
   const registerTabRef = (el, key) => {
     if (el && !tabsRef.current[key]) {
       tabsRef.current[key] = el;
-
-      // Initier pill position når første tab bliver registreret
       if (key === activeSection && tabContainerRef.current) {
         const container = tabContainerRef.current;
         const containerLeft = container.getBoundingClientRect().left;
         const tabLeft = el.getBoundingClientRect().left;
-
-        // Beregn position relativt til container
         const relativeLeft = tabLeft - containerLeft;
 
         setPillStyle({
@@ -114,28 +109,6 @@ const Tools = () => {
           left: `${relativeLeft}px`
         });
       }
-    }
-  };
-
-  // Bestem animations-retning baseret på aktiv sektion
-  const getAnimationDirection = () => {
-    switch (activeSection) {
-      case "frameworks":
-        return isChanging
-          ? "opacity-0 transform -translate-x-8" // Kommer ind fra venstre
-          : "opacity-100 transform translate-x-0";
-      case "software":
-        return isChanging
-          ? "opacity-0 transform translate-y-8" // Kommer ind fra bunden
-          : "opacity-100 transform translate-y-0";
-      case "skills":
-        return isChanging
-          ? "opacity-0 transform translate-x-8" // Kommer ind fra højre
-          : "opacity-100 transform translate-x-0";
-      default:
-        return isChanging
-          ? "opacity-0 transform translate-y-4"
-          : "opacity-100 transform translate-y-0";
     }
   };
 
@@ -192,18 +165,16 @@ const Tools = () => {
           </span>
         </h1>
 
-        {/* Navigation Tabs med glidende pill animation */}
+        {/* Navigation Tabs */}
         <div className="flex justify-center mb-12">
           <div
             ref={tabContainerRef}
             className="inline-flex bg-cream p-1 rounded-full relative"
           >
-            {/* Moving pill background - ændret fra transform:translateX til absolute positioning med left */}
             <div
               className="absolute top-1 bg-red-orange rounded-full z-0 shadow-lg"
               style={pillStyle}
             />
-
             {Object.keys(categories).map((key) => (
               <button
                 key={key}
@@ -223,24 +194,22 @@ const Tools = () => {
 
         {/* Content Area */}
         <div className="min-h-[28rem] relative">
-          <div
-            className={`transition-all duration-600 ${getAnimationDirection()}`}
-          >
+          {activeSection === "frameworks" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {categories[activeSection].items.map((item, index) => (
+              {categories.frameworks.items.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-cream rounded-xl overflow-hidden shadow-lg group hover:shadow-red-orange/20 transition-all duration-600 transform hover:-translate-y-1"
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
                 >
                   <div className="p-6 flex flex-col items-center">
-                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-all duration-300">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
                       {item.icon}
                     </div>
                     <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
                       {item.name}
                     </h3>
-
-                    {/* Proficiency Bar uden animation */}
                     <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                       <div
                         className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
@@ -255,7 +224,71 @@ const Tools = () => {
                 </div>
               ))}
             </div>
-          </div>
+          )}
+
+          {activeSection === "software" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.software.items.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
+                >
+                  <div className="p-6 flex flex-col items-center">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
+                        style={{ width: `${item.level}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between w-full mt-1">
+                      <span className="text-xs text-gray-400">Beginner</span>
+                      <span className="text-xs text-red-300">Expert</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeSection === "skills" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.skills.items.map((item, index) => (
+                <div
+                  key={index}
+                  className={`bg-cream rounded-xl overflow-hidden shadow-lg group 
+                    hover:shadow-red-orange/20 transition-opacity duration-500 ease-in-out
+                    ${isFading ? "opacity-100" : "opacity-0"}`}
+                >
+                  <div className="p-6 flex flex-col items-center">
+                    <div className="text-5xl text-red-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-gray mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-red-orange to-red-400 h-2 rounded-full"
+                        style={{ width: `${item.level}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between w-full mt-1">
+                      <span className="text-xs text-gray-400">Beginner</span>
+                      <span className="text-xs text-red-300">Expert</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
