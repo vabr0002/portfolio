@@ -63,8 +63,7 @@ const Ommig = () => {
           >
             <strong>Valdemar Bang Bredvig</strong>, a 26-year-old passionate
             <strong> Frontend Developer</strong> and{" "}
-            <strong>UX/UI-Designer</strong>. Originally from Odense, I now live
-            in Copenhagen.
+            <strong>UX/UI-Designer</strong>. Living in Odense
           </p>
           <p
             className={`text-lg leading-relaxed mt-4 transition-all duration-1000 delay-300 ${
@@ -73,11 +72,7 @@ const Ommig = () => {
                 : "opacity-0 -translate-x-40"
             }`}
           >
-            I will complete my Multimedia Design degree at KEA in the summer of
-            2025, after which I will continue with a Bachelor's in Web
-            Development starting in August. With a positive and welcoming
-            approach, I combine creativity and technical skills to craft
-            user-friendly solutions.
+ I completed my Multimedia Design degree with a specialization in frontend development. I now focus on building modern, user-friendly web solutions using HTML, CSS and JavaScript, along with frameworks like Next.js and Astro. With a calm and curious approach, I combine design awareness and technical structure to create clear and usable digital experiences.
           </p>
           <p
             className={`text-lg leading-relaxed mt-4 transition-all duration-1000 delay-400 ${
